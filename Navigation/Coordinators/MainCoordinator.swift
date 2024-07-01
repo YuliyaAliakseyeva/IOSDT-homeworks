@@ -9,11 +9,12 @@ import UIKit
 
 class MainCoordinator: Coordinator {
     var coordinators: [Coordinator] = []
+    let networkManager = NetworkManager(config: .three)
     let tabBarController: TabBarController
     private let factory = ControllerFactoryImpl()
     
     init() {
-        tabBarController = TabBarController()
+        tabBarController = TabBarController(networkManager: networkManager)
         let profileCoordinator = configureProfile()
         let feedCoordinator = configureFeed()
         coordinators.append(profileCoordinator)
