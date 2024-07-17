@@ -43,8 +43,9 @@ final class FeedCoordinator: Coordinator {
     }
     
     func showInfo() {
-        
-        let infoViewController = InfoViewController()
+        let networkService = NetworkService()
+        let viewModel = InfoViewModel(networkService: networkService)
+        let infoViewController = InfoViewController(viewModel: viewModel)
         infoViewController.coordinator = self
         infoViewController.modalTransitionStyle = .coverVertical
         infoViewController.modalPresentationStyle = .pageSheet

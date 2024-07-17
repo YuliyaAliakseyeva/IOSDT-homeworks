@@ -20,7 +20,7 @@ enum AppConfiguration {
         case .two:
             return URL(string: "https://swapi.dev/api/starships/3")!
         case .three:
-            return URL(string: "https://swapi.dev/api/planets/5!!!")!
+            return URL(string: "https://swapi.dev/api/planets/5")!
         }
     }
 }
