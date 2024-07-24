@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+
 
 final class LogInViewController: UIViewController {
     
@@ -98,6 +100,9 @@ final class LogInViewController: UIViewController {
         addSubviews()
         setupConstrains()
         setupSubviews()
+        
+        print(Auth.auth().currentUser as Any)
+        print(Auth.auth().currentUser?.email as Any)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -237,7 +242,7 @@ final class LogInViewController: UIViewController {
         emailTextField.autocapitalizationType = .none
         emailTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: emailTextField.frame.height))
         emailTextField.leftViewMode = .always
-        emailTextField.text = "Jasmine"
+        emailTextField.text = ""
         
         passwordTextField.backgroundColor = .systemGray6
         passwordTextField.placeholder = "Password"
@@ -249,7 +254,7 @@ final class LogInViewController: UIViewController {
         passwordTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: passwordTextField.frame.height))
         passwordTextField.leftViewMode = .always
         passwordTextField.isSecureTextEntry = true
-        passwordTextField.text = "Alladin"
+        passwordTextField.text = ""
         
         logInStackView.layer.cornerRadius = 10
         logInStackView.layer.borderWidth = 0.5

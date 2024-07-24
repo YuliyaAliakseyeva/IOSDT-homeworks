@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 protocol LoginViewModelProtocol{
     var isLoggedIn: Bool { get set }
@@ -22,19 +23,27 @@ final class LoginViewModel: LoginViewModelProtocol {
     
     func userButtonPressed(loginVM: String, passwordVM: String) -> User {
         
-        let match = loginDelegate?.check(login: loginVM, password: passwordVM)
-        let userForProfile: UserService
+        loginDelegate?.check(login: loginVM, password: passwordVM)
+        
+            let userForProfile: UserService
+            
+        let user = users.first { $0.login == loginVM}
+    
 #if DEBUG
-        userForProfile = TestUserService(user: users[2])
+        userForProfile = TestUserService(user: users[1])
 #else
-        userForProfile = CurrentUserService(user: users[3])
+            userForProfile = CurrentUserService(user: user ?? User(login: "", fullName: "", avatar: UIImage(systemName: "person.fill.questionmark")!, status: ""))
 #endif
-        if let user = userForProfile.authorization(login: loginVM), match == true {
-            isLoggedIn = true
-            return user
-        } else {
-            isLoggedIn = false
-            return User(login: "", fullName: "", avatar: UIImage(systemName: "person.fill.questionmark")!, status: "")
+            
+            if let user = userForProfile.authorization(login: loginVM) {
+                isLoggedIn = true
+                return user
+            } else {
+                isLoggedIn = false
+                return User(login: "", fullName: "", avatar: UIImage(systemName: "person.fill.questionmark")!, status: "")
+            }
+            
         }
-    }
+        
+    
 }
