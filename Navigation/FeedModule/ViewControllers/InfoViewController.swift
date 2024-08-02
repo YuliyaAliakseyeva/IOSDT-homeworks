@@ -118,19 +118,6 @@ final class InfoViewController: UIViewController {
     }
     
     private func getOrbitalPeriod() {
-//        self.networkService.requestOrbitalPeriod { [weak self] result in
-//            
-//            guard let self else {return}
-//            
-//            DispatchQueue.main.async {
-//                switch result {
-//                case .success(let text):
-//                    self.orbitalPeriodLabel.text = "Период обращения планеты Татуин вокруг своей звезды - \(text ?? "error")"
-//                case .failure(let error):
-//                    self.orbitalPeriodLabel.text = error.description
-//                }
-//            }
-//        }
         DispatchQueue.main.async {
             Task{
                 do{

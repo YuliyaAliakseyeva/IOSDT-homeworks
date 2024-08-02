@@ -8,84 +8,85 @@
 import UIKit
 import FirebaseAuth
 
-final class Checker {
-    static let shared = Checker()
-    
-//    private let login: String = users[3].login
-//    
-//    private var password: String = "Alladin"
+enum AuthResult {
+    case success
+    case failure(FirebaseError)
+}
 
+enum FirebaseError: Error, CustomStringConvertible {
+    case noData
+    case wrongData
+    case emailAlreadyInUse
+    case weakPassword
+    case somthingWentWrong
     
-    func check(usersLogin: String, usersPassword: String) -> Void {
-        
-        print(usersLogin)
-        print(usersPassword)
+    var description: String {
+        switch self {
+            
+        case .noData:
+            return "Не введены логин и(или) пароль"
+        case .wrongData:
+            return "Неверный логин или пароль"
+        case .emailAlreadyInUse:
+            return "email уже используется"
+        case .weakPassword:
+            return "слабый пароль"
+        case .somthingWentWrong:
+            return "Что-то пошло не так..."
+        }
+    }
+}
+
+protocol CheckerServiceProtocol {
+    func checkCredentials(usersLogin: String, usersPassword: String, completion: @escaping ((AuthResult) -> Void)) -> Void
+    func signUp(usersLogin: String, usersPassword: String, completion: @escaping ((AuthResult) -> Void)) -> Void
+}
+
+final class CheckerService: CheckerServiceProtocol {
+    static let shared = CheckerService()
+    
+    func checkCredentials(usersLogin: String, usersPassword: String, completion: @escaping ((AuthResult) -> Void)) -> Void {
         
         guard usersLogin != "", usersPassword != "" else {
+            completion(.failure(.noData))
+            return
+        }
+        
+        Auth.auth().signIn(withEmail: usersLogin, password: usersPassword) { result, error in
+            if result?.user != nil {
+                completion(.success)
+            } else {
+                completion(.failure(.wrongData))
+                return
+            }
+        }
+    }
+    
+    func signUp(usersLogin: String, usersPassword: String, completion: @escaping ((AuthResult) -> Void)) -> Void {
+        
+        guard usersLogin != "", usersPassword != "" else {
+            completion(.failure(.noData))
             return
         }
         
         Auth.auth().createUser(withEmail: usersLogin, password: usersPassword) { result, error in
             
-            if let error {
-                let err = error as NSError
-                switch err.code {
-                case AuthErrorCode.emailAlreadyInUse.rawValue:
-                    print("email уже используется")
-                    Auth.auth().signIn(withEmail: usersLogin, password: usersPassword) { result, error in
-                        if result?.user != nil {
-                            print("user is loged in")
-                        } else {
-                            print("not user")
-                            return
-                        }
+            if result?.user != nil {
+                completion(.success)
+            } else {
+                if let error {
+                    let err = error as NSError
+                    switch err.code {
+                    case AuthErrorCode.emailAlreadyInUse.rawValue:
+                        completion(.failure(.emailAlreadyInUse))
+                    case AuthErrorCode.weakPassword.rawValue:
+                        completion(.failure(.weakPassword))
+                    default:
+                        ()
                     }
-                case AuthErrorCode.weakPassword.rawValue:
-                    print("слабый пароль")
-                default:
-                    ()
+                    completion(.failure(.somthingWentWrong))
                 }
-                print(error)
             }
-            
         }
-        
-//        Auth.auth().signIn(withEmail: usersLogin, password: usersPassword) { result, error in
-//            
-//            if error == nil {
-//                print("есть пользователь")
-//                
-//            } else {
-//                print("Ошибка авторизации")
-//                
-//            }
-//        }
-//        return
-        
-//        Auth.auth().createUser(withEmail: usersLogin, password: usersPassword) { result, error in
-//            
-//            if let error {
-//                let err = error as NSError
-//                switch err.code {
-//                case AuthErrorCode.emailAlreadyInUse.rawValue:
-//                    Auth.auth().signIn(withEmail: usersLogin, password: usersPassword) { result, error in
-//                        
-//                        if result?.user != nil {
-//                            authentication = true
-//                        } else {
-//                            authentication = false
-//                        }
-//                        
-//                    }
-//                default:
-//                    ()
-//                }
-//            }
-//            authentication = true
-//            
-//        }
-    
-        
-//        return usersLogin == login && usersPassword == password
     }
 }

@@ -84,6 +84,12 @@ final class LogInViewController: UIViewController {
         return button
     }()
     
+    private lazy var signUpButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -129,6 +135,7 @@ final class LogInViewController: UIViewController {
         contentView.addSubview(logoImage)
         contentView.addSubview(logInStackView)
         contentView.addSubview(logInButton)
+        contentView.addSubview(signUpButton)
     }
     
     func setupConstrains() {
@@ -224,9 +231,25 @@ final class LogInViewController: UIViewController {
                 equalTo: contentView.trailingAnchor,
                 constant: -16
             ),
-            logInButton.bottomAnchor.constraint(
+           
+            signUpButton.topAnchor.constraint(
+                equalTo: logInButton.bottomAnchor,
+                constant: 16
+            ),
+            signUpButton.heightAnchor.constraint(
+                equalToConstant: 50
+            ),
+            signUpButton.leadingAnchor.constraint(
+                equalTo: contentView.leadingAnchor,
+                constant: 16
+            ),
+            signUpButton.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor,
+                constant: -16
+            ),
+            signUpButton.bottomAnchor.constraint(
                 equalTo: contentView.bottomAnchor,
-                constant: -(120+100+120+100+16+50)
+                constant: -(120+100+120+100+16+50+16+50)
             )
         ])
     }
@@ -268,25 +291,58 @@ final class LogInViewController: UIViewController {
         logInButton.clipsToBounds = true
         logInButton.layer.cornerRadius = 10
         logInButton.addTarget(self, action: #selector(buttonLogInPressed(_:)), for: .touchUpInside)
+        
+        signUpButton.setTitle("Sign up", for: .normal)
+        signUpButton.setTitleColor(UIColor(named: "Blue_#4885CC"), for: .normal)
+        signUpButton.addTarget(self, action: #selector(buttonSignUpPressed(_:)), for: .touchUpInside)
     }
     
     @objc func buttonLogInPressed(_ sender: UIButton) {
-        coordinator?.user = viewModel!.userButtonPressed(loginVM: (emailTextField.text ?? ""), passwordVM: passwordTextField.text ?? "")
-        if viewModel!.isLoggedIn {
-            coordinator?.isLoggedIn = viewModel!.isLoggedIn
-            coordinator?.showProfile()
+        viewModel!.userButtonPressed(loginVM: (emailTextField.text ?? ""), passwordVM: passwordTextField.text ?? "") { [weak self] in
             
-        } else {
-            let alert = UIAlertController(title: "Ошибка", message: "Неверный логин или пароль", preferredStyle: .alert)
+            guard let self else {return}
             
-            alert.addAction(UIAlertAction(title: "ОК", style: .default, handler: {action in print("Ввести логин и пароль еще раз")
-            }))
-            
-            alert.modalTransitionStyle = .flipHorizontal
-            alert.modalPresentationStyle = .pageSheet
-            
-            present(alert, animated: true)
+            if self.viewModel!.isLoggedIn {
+                self.coordinator?.user = self.viewModel!.user
+                self.coordinator?.isLoggedIn = self.viewModel!.isLoggedIn
+                self.coordinator?.showProfile()
+            } else {
+                let alert = UIAlertController(title: "Ошибка", message: self.viewModel!.error, preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "ОК", style: .default, handler: {action in print("Ввести логин и пароль еще раз")
+                }))
+                
+                alert.modalTransitionStyle = .flipHorizontal
+                alert.modalPresentationStyle = .pageSheet
+                
+                self.present(alert, animated: true)
+            }
         }
+    }
+    
+    @objc func buttonSignUpPressed(_ sender: UIButton) {
+        viewModel!.signUpButtonPressed(loginVM: (emailTextField.text!), passwordVM: passwordTextField.text!) { [weak self] in
+            
+            guard let self else {return}
+            
+            if self.viewModel!.isLoggedIn {
+                self.coordinator?.user = self.viewModel!.user
+                self.coordinator?.isLoggedIn = self.viewModel!.isLoggedIn
+                self.coordinator?.showProfile()
+                
+            } else {
+                let alert = UIAlertController(title: "Ошибка", message: self.viewModel!.error, preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "ОК", style: .default, handler: {action in print("Ввести логин и пароль еще раз")
+                }))
+                
+                alert.modalTransitionStyle = .flipHorizontal
+                alert.modalPresentationStyle = .pageSheet
+                
+                self.present(alert, animated: true)
+            }
+        }
+        
     }
     
     private func setupKeyboardObservers() {
