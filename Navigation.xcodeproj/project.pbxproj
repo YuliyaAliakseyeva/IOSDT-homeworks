@@ -12,6 +12,12 @@
 		3E0FC0BC2BA4721E00CD90DE /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0FC0B52BA4721E00CD90DE /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3E0FC0C12BA4722600CD90DE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE168F72B611D540032901E /* Post.swift */; };
 		3E10212D2B63D99700F229AC /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E10212C2B63D99700F229AC /* ProfileHeaderView.swift */; };
+		3E17B3612CAFD9B6004865B9 /* SavedPostsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17B3602CAFD9B6004865B9 /* SavedPostsCoordinator.swift */; };
+		3E17B3632CAFDADE004865B9 /* SavedPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17B3622CAFDADE004865B9 /* SavedPostsViewController.swift */; };
+		3E17B3652CAFDAFD004865B9 /* SavedPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17B3642CAFDAFD004865B9 /* SavedPostsViewModel.swift */; };
+		3E17B3692CAFDF82004865B9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17B3682CAFDF82004865B9 /* CoreDataManager.swift */; };
+		3E17B36C2CAFE058004865B9 /* PostModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3E17B36A2CAFE058004865B9 /* PostModel.xcdatamodeld */; };
+		3E17B3912CAFEE87004865B9 /* SavedPostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17B3902CAFEE87004865B9 /* SavedPostsTableViewCell.swift */; };
 		3E2EBE7C2C3D25DB007048F9 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EBE7B2C3D25DA007048F9 /* NetworkService.swift */; };
 		3E2F08612C4257CA00411BFF /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2F08602C4257CA00411BFF /* InfoViewModel.swift */; };
 		3E2F08632C425C3700411BFF /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2F08622C425C3700411BFF /* InfoModel.swift */; };
@@ -89,6 +95,12 @@
 		3E0FC0B52BA4721E00CD90DE /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E0FC0B72BA4721E00CD90DE /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		3E10212C2B63D99700F229AC /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		3E17B3602CAFD9B6004865B9 /* SavedPostsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostsCoordinator.swift; sourceTree = "<group>"; };
+		3E17B3622CAFDADE004865B9 /* SavedPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostsViewController.swift; sourceTree = "<group>"; };
+		3E17B3642CAFDAFD004865B9 /* SavedPostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostsViewModel.swift; sourceTree = "<group>"; };
+		3E17B3682CAFDF82004865B9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		3E17B36B2CAFE058004865B9 /* NSManagedObjectModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NSManagedObjectModel.xcdatamodel; sourceTree = "<group>"; };
+		3E17B3902CAFEE87004865B9 /* SavedPostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostsTableViewCell.swift; sourceTree = "<group>"; };
 		3E2EBE7B2C3D25DA007048F9 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3E2F08602C4257CA00411BFF /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
 		3E2F08622C425C3700411BFF /* InfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
@@ -214,6 +226,7 @@
 				3EE168EF2B5FC0D20032901E /* FeedViewController.swift */,
 				3EE168F32B6102730032901E /* PostViewController.swift */,
 				3EE168F92B6121230032901E /* InfoViewController.swift */,
+				3E17B3622CAFDADE004865B9 /* SavedPostsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -311,6 +324,8 @@
 				3EEBAF4D2BF8AB6800A73550 /* ViewModels */,
 				3E30E2EA2BFCC40400B04DBB /* ViewControllers */,
 				3EE168F62B611C7A0032901E /* Data */,
+				3E17B3682CAFDF82004865B9 /* CoreDataManager.swift */,
+				3E17B3902CAFEE87004865B9 /* SavedPostsTableViewCell.swift */,
 			);
 			path = FeedModule;
 			sourceTree = "<group>";
@@ -320,6 +335,7 @@
 			children = (
 				3E9ED4132BE56CFE00E0A0BA /* FeedModel.swift */,
 				3E2F08622C425C3700411BFF /* InfoModel.swift */,
+				3E17B36A2CAFE058004865B9 /* PostModel.xcdatamodeld */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -331,6 +347,7 @@
 				3EEBAF412BF49BDB00A73550 /* MainCoordinator.swift */,
 				3EEBAF452BF49C3500A73550 /* ProfileCoordinator.swift */,
 				3EEBAF472BF49C4600A73550 /* FeedCoordinator.swift */,
+				3E17B3602CAFD9B6004865B9 /* SavedPostsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -341,6 +358,7 @@
 				3EEBAF4E2BF8AB9900A73550 /* FeedViewModel.swift */,
 				3EEBAF502BF8ABB600A73550 /* PostViewModel.swift */,
 				3E2F08602C4257CA00411BFF /* InfoViewModel.swift */,
+				3E17B3642CAFDAFD004865B9 /* SavedPostsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -476,12 +494,14 @@
 			files = (
 				3EB15FD42B8525910085C80F /* PhotosTableViewCell.swift in Sources */,
 				3EE168F42B6102730032901E /* PostViewController.swift in Sources */,
+				3E17B3612CAFD9B6004865B9 /* SavedPostsCoordinator.swift in Sources */,
 				3E9ED4162BEA1CD900E0A0BA /* ProfileViewModel.swift in Sources */,
 				3E9ED4122BE1008000E0A0BA /* CustomButton.swift in Sources */,
 				3ECAB73A2BCFDB5200D738B8 /* UserService.swift in Sources */,
 				3E9ED3FF2BD685B100E0A0BA /* Checker.swift in Sources */,
 				3EEBAF4F2BF8AB9900A73550 /* FeedViewModel.swift in Sources */,
 				3EEBAF482BF49C4600A73550 /* FeedCoordinator.swift in Sources */,
+				3E17B3632CAFDADE004865B9 /* SavedPostsViewController.swift in Sources */,
 				3EE168DC2B5FBD1C0032901E /* AppDelegate.swift in Sources */,
 				3ECAB73C2BCFDE8200D738B8 /* CurrentUserService.swift in Sources */,
 				3E9ED4012BD6961E00E0A0BA /* LoginViewControllerDelegate.swift in Sources */,
@@ -494,6 +514,7 @@
 				3EE168FA2B6121230032901E /* InfoViewController.swift in Sources */,
 				3EEBAF512BF8ABB600A73550 /* PostViewModel.swift in Sources */,
 				3EEBAF442BF49BEB00A73550 /* Coordinator.swift in Sources */,
+				3E17B3912CAFEE87004865B9 /* SavedPostsTableViewCell.swift in Sources */,
 				3EEBAF4C2BF4B44D00A73550 /* ControllerFactory.swift in Sources */,
 				3EEBAF4A2BF49DEE00A73550 /* TabBarController.swift in Sources */,
 				3E2F08632C425C3700411BFF /* InfoModel.swift in Sources */,
@@ -501,6 +522,7 @@
 				3EEBAF3F2BEB856700A73550 /* Service.swift in Sources */,
 				3E9ED40A2BDA901000E0A0BA /* LoginFactory.swift in Sources */,
 				3EE168F02B5FC0D20032901E /* FeedViewController.swift in Sources */,
+				3E17B3692CAFDF82004865B9 /* CoreDataManager.swift in Sources */,
 				3EEBAF422BF49BDB00A73550 /* MainCoordinator.swift in Sources */,
 				3EEBAF552BF8ABE400A73550 /* LoginViewModel.swift in Sources */,
 				3EEBAF462BF49C3500A73550 /* ProfileCoordinator.swift in Sources */,
@@ -508,6 +530,7 @@
 				3EE168DE2B5FBD1C0032901E /* SceneDelegate.swift in Sources */,
 				3ECAB7402BD1349F00D738B8 /* TestUserService.swift in Sources */,
 				3EB15FDA2B89FFBB0085C80F /* PhotosViewController.swift in Sources */,
+				3E17B3652CAFDAFD004865B9 /* SavedPostsViewModel.swift in Sources */,
 				3E2EBE7C2C3D25DB007048F9 /* NetworkService.swift in Sources */,
 				3ECAB73E2BCFE43B00D738B8 /* ListOfUsers.swift in Sources */,
 				3EE88B362B949A7A005D81FA /* CustomButton2.swift in Sources */,
@@ -515,6 +538,7 @@
 				3EE53F172C08A00D0030B7D6 /* BruteForce.swift in Sources */,
 				3E2F08612C4257CA00411BFF /* InfoViewModel.swift in Sources */,
 				3EB15FDE2B8A06380085C80F /* PhotosCollectionViewCell.swift in Sources */,
+				3E17B36C2CAFE058004865B9 /* PostModel.xcdatamodeld in Sources */,
 				3E10212D2B63D99700F229AC /* ProfileHeaderView.swift in Sources */,
 				3EB15FCE2B7CE13C0085C80F /* PostForProfile.swift in Sources */,
 			);
@@ -848,6 +872,19 @@
 			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		3E17B36A2CAFE058004865B9 /* PostModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3E17B36B2CAFE058004865B9 /* NSManagedObjectModel.xcdatamodel */,
+			);
+			currentVersion = 3E17B36B2CAFE058004865B9 /* NSManagedObjectModel.xcdatamodel */;
+			path = PostModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3EE168D02B5FBD1B0032901E /* Project object */;
 }

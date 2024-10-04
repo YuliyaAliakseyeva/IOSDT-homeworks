@@ -37,7 +37,7 @@ final class FeedCoordinator: Coordinator {
         let viewModel = PostViewModel()
         let postViewController = PostViewController(postViewModel: viewModel)
         postViewController.coordinator = self
-        viewModel.firstPost = Post(title: "Первый пост")
+        viewModel.firstPost = PostForFeed(title: "Первый пост")
         postViewController.titlePost = viewModel.firstPost?.title ?? ""
         navigationController.pushViewController(postViewController, animated: true)
     }
