@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol LoginViewControllerDelegate {
     
-    func check(login: String, password: String) -> Bool
+    func checkCredentials(login: String, password: String, completion: @escaping ((AuthResult) -> Void)) -> Void
+    
+    func signUp(login: String, password: String, completion: @escaping ((AuthResult) -> Void)) -> Void
 }

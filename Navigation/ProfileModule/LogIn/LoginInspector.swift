@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 struct LoginInspector: LoginViewControllerDelegate {
-    func check(login: String, password: String) -> Bool {
-        return Checker.shared.check(usersLogin: login, usersPassword: password)
+    
+    func checkCredentials(login: String, password: String, completion: @escaping ((AuthResult) -> Void)) -> Void {
+        return CheckerService.shared.checkCredentials(usersLogin: login, usersPassword: password, completion: completion)
+    }
+    func signUp(login: String, password: String, completion: @escaping ((AuthResult) -> Void)) -> Void {
+        return CheckerService.shared.signUp(usersLogin: login, usersPassword: password, completion: completion)
     }
 }

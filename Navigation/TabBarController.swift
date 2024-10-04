@@ -11,9 +11,9 @@ final class TabBarController: UITabBarController {
     
     private var timer: Timer?
     
-    var networkManager: NetworkManager
+    var networkManager: NetworkService
     
-    init(networkManager: NetworkManager) {
+    init(networkManager: NetworkService) {
         self.networkManager = networkManager
         super.init(nibName: nil, bundle: nil)
     }
