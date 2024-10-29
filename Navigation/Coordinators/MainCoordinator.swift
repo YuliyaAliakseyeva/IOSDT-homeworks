@@ -17,12 +17,15 @@ class MainCoordinator: Coordinator {
         tabBarController = TabBarController(networkManager: networkManager)
         let profileCoordinator = configureProfile()
         let feedCoordinator = configureFeed()
+        let savedPostsCoordinator = configureSavedPosts()
         coordinators.append(profileCoordinator)
         coordinators.append(feedCoordinator)
+        coordinators.append(savedPostsCoordinator)
         
-        tabBarController.viewControllers = [profileCoordinator.navigationController, feedCoordinator.navigationController]
+        tabBarController.viewControllers = [profileCoordinator.navigationController, feedCoordinator.navigationController, savedPostsCoordinator.navigationController]
         profileCoordinator.start()
         feedCoordinator.start()
+        savedPostsCoordinator.start()
     }
     
     private func configureProfile() -> ProfileCoordinator {
@@ -48,6 +51,20 @@ class MainCoordinator: Coordinator {
             tag: 0)
         let coordinator = FeedCoordinator(
             navigation: navigationFeed,
+            factory: factory)
+        
+        return coordinator
+    }
+    
+    private func configureSavedPosts() -> SavedPostsCoordinator {
+        
+        let navigationSavedPosts = UINavigationController()
+        navigationSavedPosts.tabBarItem = UITabBarItem(
+            title: "Избранное",
+            image: UIImage(systemName: "star.fill"),
+            tag: 0)
+        let coordinator = SavedPostsCoordinator(
+            navigation: navigationSavedPosts,
             factory: factory)
         
         return coordinator

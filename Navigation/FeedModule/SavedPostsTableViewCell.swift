@@ -1,17 +1,16 @@
 //
-//  PostTableViewCell.swift
+//  SavedPostsTableViewCell.swift
 //  Navigation
 //
-//  Created by Yuliya Vodneva on 15.02.24.
+//  Created by Yuliya Vodneva on 4.10.24.
 //
 
 import UIKit
+import CoreData
 
-final class PostTableViewCell: UITableViewCell {
+final class SavedPostsTableViewCell: UITableViewCell {
     
-    static let id = "PostTableViewCell"
-    
-    private var post: PostForProfile = PostForProfile()
+    static let id = "SavedPostsTableViewCell"
     
     private let authorPostView: UILabel = {
         let view = UILabel()
@@ -60,27 +59,13 @@ final class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with data: PostForProfile) {
+    func configure(with data: Post) {
         authorPostView.text = data.author
-        descriptionPostView.text = data.description
-        imagePostView.image = UIImage(named: data.image)
+        descriptionPostView.text = data.text
+        imagePostView.image = UIImage(named: data.image ?? "")
         likesPostView.text = "Likes: \(data.likes)"
         viewsPostView.text = "Views: \(data.views)"
-        
-        post = data
-        
-        let tap = UITapGestureRecognizer()
-        tap.numberOfTapsRequired = 2
-        tap.addTarget(self, action: #selector(doubleTappedCell))
-        self.isUserInteractionEnabled = true
-        self.addGestureRecognizer(tap)
     }
-    
-    @objc func doubleTappedCell(_ gesture: UIPanGestureRecognizer) {
-           
-            CoreDataManager.shared.addPost(author: post.author, text: post.description, image: post.image, likes: post.likes, views: post.views)
-        }
-        
     
     private func setupUI() {
         contentView.addSubview(authorPostView)

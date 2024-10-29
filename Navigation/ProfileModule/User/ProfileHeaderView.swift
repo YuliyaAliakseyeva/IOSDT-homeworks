@@ -50,6 +50,7 @@ final class ProfileHeaderView: UIView {
     lazy var setStatusButton: UIButton = {
         let button = UIButton(configuration: .filled(), primaryAction: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         button.setTitle("Set status", for: .normal)
         return button
     }()
