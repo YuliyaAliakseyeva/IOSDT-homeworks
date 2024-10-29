@@ -36,24 +36,18 @@ final class LoginViewModel: LoginViewModelProtocol {
             case .success:
                 let userForProfile: UserService
                 
-                if let authUser = users.first(where: { $0.login == loginVM}) {
+                self.user = users.first(where: { $0.login == loginVM}) ?? User(login: loginVM, fullName: "", avatar: UIImage(systemName: "person.fill.questionmark")!, status: "")
+                
 #if DEBUG
                     userForProfile = TestUserService(user: users[1])
 #else
-                    userForProfile = CurrentUserService(user: authUser)
+                userForProfile = CurrentUserService(user: self.user!)
 #endif
-                    let authorizedUser = userForProfile.authorization(login: loginVM)
-                    
-                    self.isLoggedIn = true
-                    print("юзер isLoggedIn - \(String(describing: Auth.auth().currentUser))")
-                    self.user = authorizedUser
-                    print("Юзер при успехе в замыкании \(String(describing: self.user))")
-                } else {
-                    self.isLoggedIn = false
-                    print("юзер isNotLoggedIn - \(String(describing: Auth.auth().currentUser))")
-                    self.user = nil
-                    self.error = "Пользователь отсутствует в базе"
-                }
+                
+                self.user = users.first(where: { $0.login == loginVM}) ?? User(login: loginVM, fullName: loginVM, avatar: UIImage(systemName: "person")!, status: "")
+                self.isLoggedIn = true
+                print("юзер isLoggedIn - \(String(describing: Auth.auth().currentUser))")
+                
             case .failure(let error):
                 self.user = nil
                 self.error = error.description

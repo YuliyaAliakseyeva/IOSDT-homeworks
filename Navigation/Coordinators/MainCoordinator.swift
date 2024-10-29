@@ -18,14 +18,17 @@ class MainCoordinator: Coordinator {
         let profileCoordinator = configureProfile()
         let feedCoordinator = configureFeed()
         let savedPostsCoordinator = configureSavedPosts()
+        let mapCoordinator = configureMap()
         coordinators.append(profileCoordinator)
         coordinators.append(feedCoordinator)
         coordinators.append(savedPostsCoordinator)
+        coordinators.append(mapCoordinator)
         
-        tabBarController.viewControllers = [profileCoordinator.navigationController, feedCoordinator.navigationController, savedPostsCoordinator.navigationController]
+        tabBarController.viewControllers = [profileCoordinator.navigationController, feedCoordinator.navigationController, savedPostsCoordinator.navigationController, mapCoordinator.navigationController]
         profileCoordinator.start()
         feedCoordinator.start()
         savedPostsCoordinator.start()
+        mapCoordinator.start()
     }
     
     private func configureProfile() -> ProfileCoordinator {
@@ -65,6 +68,20 @@ class MainCoordinator: Coordinator {
             tag: 0)
         let coordinator = SavedPostsCoordinator(
             navigation: navigationSavedPosts,
+            factory: factory)
+        
+        return coordinator
+    }
+    
+    private func configureMap() -> MapCoordinator {
+        
+        let navigationMap = UINavigationController()
+        navigationMap.tabBarItem = UITabBarItem(
+            title: "Карта",
+            image: UIImage(systemName: "map"),
+            tag: 0)
+        let coordinator = MapCoordinator(
+            navigation: navigationMap,
             factory: factory)
         
         return coordinator
