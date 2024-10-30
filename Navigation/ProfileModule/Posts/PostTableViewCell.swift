@@ -4,7 +4,7 @@
 //
 //  Created by Yuliya Vodneva on 15.02.24.
 //
-
+import Foundation
 import UIKit
 
 final class PostTableViewCell: UITableViewCell {
@@ -64,8 +64,9 @@ final class PostTableViewCell: UITableViewCell {
         authorPostView.text = data.author
         descriptionPostView.text = data.description
         imagePostView.image = UIImage(named: data.image)
-        likesPostView.text = "Likes: \(data.likes)"
-        viewsPostView.text = "Views: \(data.views)"
+//        likesPostView.text = NSLocalizedString("Likes", comment: "") + ": \(data.likes)"
+        likesPostView.text =  "\(data.likes.amountOfLikes)"
+        viewsPostView.text = NSLocalizedString("Views", comment: "") + ": \(data.views)"
         
         post = data
         

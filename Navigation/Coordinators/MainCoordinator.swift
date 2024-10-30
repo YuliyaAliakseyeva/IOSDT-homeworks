@@ -35,7 +35,7 @@ class MainCoordinator: Coordinator {
         
         let navigationProfile = UINavigationController()
         navigationProfile.tabBarItem = UITabBarItem(
-            title: "Профиль",
+            title: NSLocalizedString("Profile", comment: ""),
             image: UIImage(systemName: "person.circle"),
             tag: 1)
         let coordinator = ProfileCoordinator(
@@ -49,7 +49,7 @@ class MainCoordinator: Coordinator {
         
         let navigationFeed = UINavigationController()
         navigationFeed.tabBarItem = UITabBarItem(
-            title: "Лента",
+            title: NSLocalizedString("Feed", comment: ""),
             image: UIImage(systemName: "text.justify"),
             tag: 0)
         let coordinator = FeedCoordinator(
@@ -63,7 +63,7 @@ class MainCoordinator: Coordinator {
         
         let navigationSavedPosts = UINavigationController()
         navigationSavedPosts.tabBarItem = UITabBarItem(
-            title: "Избранное",
+            title: NSLocalizedString("Favorites", comment: ""),
             image: UIImage(systemName: "star.fill"),
             tag: 0)
         let coordinator = SavedPostsCoordinator(
@@ -77,7 +77,7 @@ class MainCoordinator: Coordinator {
         
         let navigationMap = UINavigationController()
         navigationMap.tabBarItem = UITabBarItem(
-            title: "Карта",
+            title: NSLocalizedString("Map", comment: ""),
             image: UIImage(systemName: "map"),
             tag: 0)
         let coordinator = MapCoordinator(

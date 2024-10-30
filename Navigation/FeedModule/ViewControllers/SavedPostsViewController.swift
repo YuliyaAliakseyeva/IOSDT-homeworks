@@ -31,7 +31,7 @@ class SavedPostsViewController: UIViewController {
 
         view.backgroundColor = .systemBackground
     
-        title = "Избранное"
+        title = NSLocalizedString("Favorites", comment: "")
         addSubvies()
         setupTableView()
         

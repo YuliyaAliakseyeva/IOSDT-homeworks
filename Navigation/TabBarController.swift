@@ -50,11 +50,11 @@ final class TabBarController: UITabBarController {
                 counter -= 1
                 
                 if counter <= 0 {
-                    let alert = UIAlertController(title: "Справка", message: "Вы находитесь в приложении уже 10 минут. Рекомендуем сделать перерыв.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: NSLocalizedString("Help", comment: ""), message: NSLocalizedString("Comment", comment: ""), preferredStyle: .alert)
                     
                     alert.addAction(UIAlertAction(title: "ОК", style: .default, handler: {action in print("Нужен перерыв")
                     }))
-                    alert.addAction(UIAlertAction(title: "Не сейчас", style: .default, handler: {action in print("Продолжить в приложении")
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("Not now", comment: ""), style: .default, handler: {action in print("Продолжить в приложении")
                     }))
                     
                     alert.modalTransitionStyle = .flipHorizontal

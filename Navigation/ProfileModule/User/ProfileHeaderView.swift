@@ -51,7 +51,7 @@ final class ProfileHeaderView: UIView {
         let button = UIButton(configuration: .filled(), primaryAction: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle("Set status", for: .normal)
+        button.setTitle(NSLocalizedString("SetStatus", comment: ""), for: .normal)
         return button
     }()
     
@@ -61,7 +61,7 @@ final class ProfileHeaderView: UIView {
         field.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         field.textColor = .black
         field.backgroundColor = .white
-        field.placeholder = "Update your status"
+        field.placeholder = NSLocalizedString("UpdateYourStatus", comment: "")
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: field.frame.height))
         field.leftViewMode = .always
         return field

@@ -63,8 +63,8 @@ final class SavedPostsTableViewCell: UITableViewCell {
         authorPostView.text = data.author
         descriptionPostView.text = data.text
         imagePostView.image = UIImage(named: data.image ?? "")
-        likesPostView.text = "Likes: \(data.likes)"
-        viewsPostView.text = "Views: \(data.views)"
+        likesPostView.text =  "\(Int(data.likes).amountOfLikes)"
+        viewsPostView.text = NSLocalizedString("Views", comment: "") + ": \(data.views)"
     }
     
     private func setupUI() {
