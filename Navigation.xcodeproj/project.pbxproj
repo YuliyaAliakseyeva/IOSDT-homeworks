@@ -32,6 +32,9 @@
 		3E9ED4162BEA1CD900E0A0BA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9ED4152BEA1CD900E0A0BA /* ProfileViewModel.swift */; };
 		3EAD98A02C49581600947809 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EAD989F2C49581600947809 /* GoogleService-Info.plist */; };
 		3EAD98A32C49637900947809 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3EAD98A22C49637900947809 /* FirebaseAuth */; };
+		3EAE897C2CCE65960088E2C4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAE897B2CCE65960088E2C4 /* MapViewController.swift */; };
+		3EAE897E2CCE65A80088E2C4 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAE897D2CCE65A80088E2C4 /* MapViewModel.swift */; };
+		3EAE89802CCE67510088E2C4 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAE897F2CCE67510088E2C4 /* MapCoordinator.swift */; };
 		3EB15FCC2B74FB2C0085C80F /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB15FCB2B74FB2C0085C80F /* LogInViewController.swift */; };
 		3EB15FCE2B7CE13C0085C80F /* PostForProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB15FCD2B7CE13C0085C80F /* PostForProfile.swift */; };
 		3EB15FD22B7E3A0F0085C80F /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB15FD12B7E3A0F0085C80F /* PostTableViewCell.swift */; };
@@ -113,6 +116,9 @@
 		3E9ED4132BE56CFE00E0A0BA /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		3E9ED4152BEA1CD900E0A0BA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		3EAD989F2C49581600947809 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3EAE897B2CCE65960088E2C4 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		3EAE897D2CCE65A80088E2C4 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		3EAE897F2CCE67510088E2C4 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		3EB15FCB2B74FB2C0085C80F /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		3EB15FCD2B7CE13C0085C80F /* PostForProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostForProfile.swift; sourceTree = "<group>"; };
 		3EB15FD12B7E3A0F0085C80F /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -280,6 +286,15 @@
 			path = Photos;
 			sourceTree = "<group>";
 		};
+		3EAE897A2CCE654F0088E2C4 /* MapModule */ = {
+			isa = PBXGroup;
+			children = (
+				3EAE897B2CCE65960088E2C4 /* MapViewController.swift */,
+				3EAE897D2CCE65A80088E2C4 /* MapViewModel.swift */,
+			);
+			path = MapModule;
+			sourceTree = "<group>";
+		};
 		3EE168CF2B5FBD1B0032901E = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +324,7 @@
 				3EEBAF4B2BF4B44D00A73550 /* ControllerFactory.swift */,
 				3E10212B2B63D95F00F229AC /* ProfileModule */,
 				3EE168F52B611C190032901E /* FeedModule */,
+				3EAE897A2CCE654F0088E2C4 /* MapModule */,
 				3EE168E42B5FBD210032901E /* Assets.xcassets */,
 				3EE168E62B5FBD210032901E /* LaunchScreen.storyboard */,
 				3EE168E92B5FBD210032901E /* Info.plist */,
@@ -348,6 +364,7 @@
 				3EEBAF452BF49C3500A73550 /* ProfileCoordinator.swift */,
 				3EEBAF472BF49C4600A73550 /* FeedCoordinator.swift */,
 				3E17B3602CAFD9B6004865B9 /* SavedPostsCoordinator.swift */,
+				3EAE897F2CCE67510088E2C4 /* MapCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -501,6 +518,7 @@
 				3E9ED3FF2BD685B100E0A0BA /* Checker.swift in Sources */,
 				3EEBAF4F2BF8AB9900A73550 /* FeedViewModel.swift in Sources */,
 				3EEBAF482BF49C4600A73550 /* FeedCoordinator.swift in Sources */,
+				3EAE89802CCE67510088E2C4 /* MapCoordinator.swift in Sources */,
 				3E17B3632CAFDADE004865B9 /* SavedPostsViewController.swift in Sources */,
 				3EE168DC2B5FBD1C0032901E /* AppDelegate.swift in Sources */,
 				3ECAB73C2BCFDE8200D738B8 /* CurrentUserService.swift in Sources */,
@@ -525,6 +543,7 @@
 				3E17B3692CAFDF82004865B9 /* CoreDataManager.swift in Sources */,
 				3EEBAF422BF49BDB00A73550 /* MainCoordinator.swift in Sources */,
 				3EEBAF552BF8ABE400A73550 /* LoginViewModel.swift in Sources */,
+				3EAE897C2CCE65960088E2C4 /* MapViewController.swift in Sources */,
 				3EEBAF462BF49C3500A73550 /* ProfileCoordinator.swift in Sources */,
 				3E9ED4032BD7D0D600E0A0BA /* LoginInspector.swift in Sources */,
 				3EE168DE2B5FBD1C0032901E /* SceneDelegate.swift in Sources */,
@@ -538,6 +557,7 @@
 				3EE53F172C08A00D0030B7D6 /* BruteForce.swift in Sources */,
 				3E2F08612C4257CA00411BFF /* InfoViewModel.swift in Sources */,
 				3EB15FDE2B8A06380085C80F /* PhotosCollectionViewCell.swift in Sources */,
+				3EAE897E2CCE65A80088E2C4 /* MapViewModel.swift in Sources */,
 				3E17B36C2CAFE058004865B9 /* PostModel.xcdatamodeld in Sources */,
 				3E10212D2B63D99700F229AC /* ProfileHeaderView.swift in Sources */,
 				3EB15FCE2B7CE13C0085C80F /* PostForProfile.swift in Sources */,
@@ -765,6 +785,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please give permission for define your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -792,6 +813,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please give permission for define your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
