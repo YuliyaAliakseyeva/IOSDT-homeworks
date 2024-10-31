@@ -21,7 +21,7 @@ final class InfoViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.text = "title"
+        label.text = NSLocalizedString("title", comment: "")
         return label
     }()
     
@@ -31,14 +31,14 @@ final class InfoViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.text = "orbital period"
+        label.text = NSLocalizedString("orbital period", comment: "")
         return label
     }()
     
     private lazy var alertButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Оповещение", for: .normal)
+        button.setTitle(NSLocalizedString("Alert", comment: ""), for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         
         return button
@@ -122,7 +122,7 @@ final class InfoViewController: UIViewController {
             Task{
                 do{
                     let orbitPeriod = try await self.networkService.requestOrbitalPeriod()
-                    self.orbitalPeriodLabel.text = "Период обращения планеты Татуин вокруг своей звезды - \(orbitPeriod)"
+                    self.orbitalPeriodLabel.text = NSLocalizedString("orbital period", comment: "") + " \(orbitPeriod)"
                 }
             }
         }
@@ -196,11 +196,11 @@ final class InfoViewController: UIViewController {
     
     @objc func buttonPressed(_ sender: UIButton) {
         
-        let alert = UIAlertController(title: "Справка", message: "Сохранить в избранное?", preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("Help", comment: ""), message: NSLocalizedString("Save to favorites?", comment: ""), preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "Да", style: .default, handler: {action in print("Пост сохранен в избранное")
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {action in print("Пост сохранен в избранное")
         }))
-        alert.addAction(UIAlertAction(title: "Нет", style: .default, handler: {action in print("Пост не сохранен в избранное")
+        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: {action in print("Пост не сохранен в избранное")
         }))
         
         alert.modalTransitionStyle = .flipHorizontal

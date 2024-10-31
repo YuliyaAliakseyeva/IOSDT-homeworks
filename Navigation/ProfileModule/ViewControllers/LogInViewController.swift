@@ -5,6 +5,7 @@
 //  Created by Yuliya Vodneva on 8.02.24.
 //
 
+import Foundation
 import UIKit
 import FirebaseAuth
 
@@ -257,7 +258,7 @@ final class LogInViewController: UIViewController {
     func setupSubviews() {
         
         emailTextField.backgroundColor = .systemGray6
-        emailTextField.placeholder = "Email or phone"
+        emailTextField.placeholder = NSLocalizedString("EmailOrPhone", comment: "")
         emailTextField.textColor = .black
         emailTextField.keyboardType = UIKeyboardType.default
         emailTextField.returnKeyType = UIReturnKeyType.done
@@ -268,7 +269,7 @@ final class LogInViewController: UIViewController {
         emailTextField.text = ""
         
         passwordTextField.backgroundColor = .systemGray6
-        passwordTextField.placeholder = "Password"
+        passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
         passwordTextField.textColor = .black
         passwordTextField.keyboardType = UIKeyboardType.default
         passwordTextField.returnKeyType = UIReturnKeyType.done
@@ -286,13 +287,13 @@ final class LogInViewController: UIViewController {
         
         let img = UIImage(named: "blue_pixel")
         logInButton.setBackgroundImage(img, for: .normal)
-        logInButton.setTitle("Log In", for: .normal)
+        logInButton.setTitle(NSLocalizedString("LogIn", comment: ""), for: .normal)
         logInButton.tintColor = .white
         logInButton.clipsToBounds = true
         logInButton.layer.cornerRadius = 10
         logInButton.addTarget(self, action: #selector(buttonLogInPressed(_:)), for: .touchUpInside)
         
-        signUpButton.setTitle("Sign up", for: .normal)
+        signUpButton.setTitle(NSLocalizedString("SignUp", comment: ""), for: .normal)
         signUpButton.setTitleColor(UIColor(named: "Blue_#4885CC"), for: .normal)
         signUpButton.addTarget(self, action: #selector(buttonSignUpPressed(_:)), for: .touchUpInside)
     }
@@ -307,7 +308,7 @@ final class LogInViewController: UIViewController {
                 self.coordinator?.isLoggedIn = self.viewModel!.isLoggedIn
                 self.coordinator?.showProfile()
             } else {
-                let alert = UIAlertController(title: "Ошибка", message: self.viewModel!.error, preferredStyle: .alert)
+                let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: self.viewModel!.error, preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "ОК", style: .default, handler: {action in print("Ввести логин и пароль еще раз")
                 }))
@@ -331,7 +332,7 @@ final class LogInViewController: UIViewController {
                 self.coordinator?.showProfile()
                 
             } else {
-                let alert = UIAlertController(title: "Ошибка", message: self.viewModel!.error, preferredStyle: .alert)
+                let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: self.viewModel!.error, preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "ОК", style: .default, handler: {action in print("Ввести логин и пароль еще раз")
                 }))

@@ -16,7 +16,7 @@ class MapViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     
-    let items = ["Стандарт", "Спутник", "Гибрид"]
+    let items = [NSLocalizedString("Standart", comment: ""), NSLocalizedString("Satellite", comment: ""), NSLocalizedString("Hybrid", comment: "")]
     
     var annotationSource: MKPointAnnotation?
     var annotationDestination: MKPointAnnotation?
@@ -49,7 +49,7 @@ class MapViewController: UIViewController {
     }
     
     private func setupView(){
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .lightGray
     }
     
     private func addSubviews() {
