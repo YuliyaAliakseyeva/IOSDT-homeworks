@@ -20,7 +20,7 @@ final class LogInViewController: UIViewController {
         scrollView.showsVerticalScrollIndicator = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .white
+        scrollView.backgroundColor = ColorManager.whiteBacground
         
         return scrollView
     }()
@@ -28,7 +28,7 @@ final class LogInViewController: UIViewController {
     private lazy var contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
+        view.backgroundColor = ColorManager.whiteBacground
         
         return view
     }()
@@ -259,7 +259,7 @@ final class LogInViewController: UIViewController {
         
         emailTextField.backgroundColor = .systemGray6
         emailTextField.placeholder = NSLocalizedString("EmailOrPhone", comment: "")
-        emailTextField.textColor = .black
+        emailTextField.textColor = ColorManager.blackBacground
         emailTextField.keyboardType = UIKeyboardType.default
         emailTextField.returnKeyType = UIReturnKeyType.done
         emailTextField.font = UIFont.systemFont(ofSize: 16)
@@ -270,7 +270,7 @@ final class LogInViewController: UIViewController {
         
         passwordTextField.backgroundColor = .systemGray6
         passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
-        passwordTextField.textColor = .black
+        passwordTextField.textColor = ColorManager.blackBacground
         passwordTextField.keyboardType = UIKeyboardType.default
         passwordTextField.returnKeyType = UIReturnKeyType.done
         passwordTextField.font = UIFont.systemFont(ofSize: 16)
