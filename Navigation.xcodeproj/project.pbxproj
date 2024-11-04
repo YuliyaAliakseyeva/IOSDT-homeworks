@@ -32,6 +32,7 @@
 		3E9ED4142BE56CFE00E0A0BA /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9ED4132BE56CFE00E0A0BA /* FeedModel.swift */; };
 		3E9ED4162BEA1CD900E0A0BA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9ED4152BEA1CD900E0A0BA /* ProfileViewModel.swift */; };
 		3EA3CBC52CD4B45300B716E7 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3CBC42CD4B45300B716E7 /* ColorManager.swift */; };
+		3EA3CBCD2CD8BBC200B716E7 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3CBCC2CD8BBC200B716E7 /* LocalNotificationsService.swift */; };
 		3EAD98A02C49581600947809 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EAD989F2C49581600947809 /* GoogleService-Info.plist */; };
 		3EAD98A32C49637900947809 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3EAD98A22C49637900947809 /* FirebaseAuth */; };
 		3EAE897C2CCE65960088E2C4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAE897B2CCE65960088E2C4 /* MapViewController.swift */; };
@@ -122,6 +123,7 @@
 		3E9ED4132BE56CFE00E0A0BA /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		3E9ED4152BEA1CD900E0A0BA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		3EA3CBC42CD4B45300B716E7 /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
+		3EA3CBCC2CD8BBC200B716E7 /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		3EAD989F2C49581600947809 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3EAE897B2CCE65960088E2C4 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		3EAE897D2CCE65A80088E2C4 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				3EE168DB2B5FBD1C0032901E /* AppDelegate.swift */,
 				3EE168DD2B5FBD1C0032901E /* SceneDelegate.swift */,
 				3E2EBE7B2C3D25DA007048F9 /* NetworkService.swift */,
+				3EA3CBCC2CD8BBC200B716E7 /* LocalNotificationsService.swift */,
 				3EEBAF492BF49DEE00A73550 /* TabBarController.swift */,
 				3EEBAF4B2BF4B44D00A73550 /* ControllerFactory.swift */,
 				3E10212B2B63D95F00F229AC /* ProfileModule */,
@@ -545,6 +548,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EA3CBCD2CD8BBC200B716E7 /* LocalNotificationsService.swift in Sources */,
 				3EB15FD42B8525910085C80F /* PhotosTableViewCell.swift in Sources */,
 				3EE168F42B6102730032901E /* PostViewController.swift in Sources */,
 				3E9C10592CD3A29300EB9AE7 /* Extention_UIColor.swift in Sources */,
