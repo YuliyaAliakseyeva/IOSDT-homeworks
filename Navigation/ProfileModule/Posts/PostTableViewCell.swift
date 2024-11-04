@@ -159,7 +159,7 @@ final class PostTableViewCell: UITableViewCell {
         ])
         
         authorPostView.font = .systemFont(ofSize: 20, weight: .bold)
-        authorPostView.textColor = .black
+        authorPostView.textColor = ColorManager.blackBacground
         authorPostView.numberOfLines = 2
         
         descriptionPostView.font = .systemFont(ofSize: 14, weight: .regular)
@@ -167,12 +167,12 @@ final class PostTableViewCell: UITableViewCell {
         descriptionPostView.numberOfLines = 0
         
         imagePostView.contentMode = .scaleAspectFit
-        imagePostView.backgroundColor = .black
+        imagePostView.backgroundColor = ColorManager.whiteBacground
         
         likesPostView.font = .systemFont(ofSize: 16, weight: .regular)
-        likesPostView.textColor = .black
+        likesPostView.textColor = ColorManager.blackBacground
         
         viewsPostView.font = .systemFont(ofSize: 16, weight: .regular)
-        viewsPostView.textColor = .black
+        viewsPostView.textColor = ColorManager.blackBacground
     }
 }

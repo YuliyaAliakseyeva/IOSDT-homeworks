@@ -31,7 +31,7 @@ final class ProfileHeaderView: UIView {
         let nameView = UILabel()
         nameView.translatesAutoresizingMaskIntoConstraints = false
         //        nameView.text = "Рапунцель"
-        nameView.textColor = .black
+        nameView.textColor = ColorManager.blackBacground
         nameView.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         nameView.numberOfLines = 0
         return nameView
@@ -40,7 +40,7 @@ final class ProfileHeaderView: UIView {
     lazy var statusLabel: UILabel = {
         let textView = UILabel()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.textColor = .darkGray
+        textView.textColor = ColorManager.grayText
         textView.text = "Status"
         textView.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         textView.numberOfLines = 0
@@ -59,8 +59,8 @@ final class ProfileHeaderView: UIView {
         let field = UITextField()
         field.translatesAutoresizingMaskIntoConstraints = false
         field.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        field.textColor = .black
-        field.backgroundColor = .white
+        field.textColor = ColorManager.blackBacground
+        field.backgroundColor = ColorManager.whiteBacground
         field.placeholder = NSLocalizedString("UpdateYourStatus", comment: "")
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: field.frame.height))
         field.leftViewMode = .always
@@ -181,7 +181,7 @@ final class ProfileHeaderView: UIView {
         super.layoutSubviews()
         self.avatarImageView.clipsToBounds = true
         self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.height / 2
-        self.avatarImageView.layer.borderColor = UIColor.white.cgColor
+        self.avatarImageView.layer.borderColor = ColorManager.whiteBorder.cgColor
         self.avatarImageView.layer.borderWidth = 3
         
         self.setStatusButton.clipsToBounds = false
@@ -193,7 +193,7 @@ final class ProfileHeaderView: UIView {
         self.setStatusButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         
         self.statusTextField.layer.cornerRadius = 12
-        self.statusTextField.layer.borderColor = UIColor.black.cgColor
+        self.statusTextField.layer.borderColor = ColorManager.blackBorder.cgColor
         self.statusTextField.layer.borderWidth = 1
         self.statusTextField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
     }
