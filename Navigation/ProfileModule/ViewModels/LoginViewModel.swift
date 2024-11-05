@@ -16,6 +16,8 @@ protocol LoginViewModelProtocol{
     
     func userButtonPressed(loginVM: String, passwordVM: String, completion: @escaping () -> ()) -> Void
     func signUpButtonPressed(loginVM: String, passwordVM: String, completion: @escaping () -> ()) -> Void
+    
+    func biometricsButtonPressed(completion: @escaping () -> ())
 }
 
 final class LoginViewModel: LoginViewModelProtocol {
@@ -91,6 +93,12 @@ final class LoginViewModel: LoginViewModelProtocol {
             }
             completion()
         }
+    }
+    
+    func biometricsButtonPressed(completion: @escaping () -> ()) {
+        self.user = users[2]
+        self.isLoggedIn = true
+        completion()
     }
 }
 

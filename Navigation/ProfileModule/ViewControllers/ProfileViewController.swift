@@ -31,10 +31,10 @@ final class ProfileViewController: UIViewController {
         return tableView
     }()
     
-    private let activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .medium)
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        return indicator
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+            let indicator = UIActivityIndicatorView(style: .medium)
+            indicator.translatesAutoresizingMaskIntoConstraints = false
+            return indicator
     }()
     
     init(profileViewModel: ProfileViewModel) {
@@ -114,9 +114,12 @@ final class ProfileViewController: UIViewController {
             case .initial:
                 print("initial")
             case .loading:
-                tableView.isHidden = true
-                activityIndicator.isHidden = false
-                activityIndicator.startAnimating()
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    tableView.isHidden = true
+                    activityIndicator.isHidden = false
+                    activityIndicator.startAnimating()
+                }
             case .loaded(let posts):
                 DispatchQueue.main.async { [weak self] in
                     guard let self else { return }
