@@ -23,10 +23,10 @@ final class FeedViewModel: FeedViewModelProtocol {
     
     func check(word: String) {
         if word == model.secretWord {
-            self.text = "Верно"
+            self.text = NSLocalizedString("Correct", comment: "")
             self.color = .green
         } else {
-            self.text = "Неверно"
+            self.text = NSLocalizedString("Not correct", comment: "")
             self.color = .red
         }
     }

@@ -4,12 +4,14 @@
 //
 //  Created by Yuliya Vodneva on 15.02.24.
 //
-
+import Foundation
 import UIKit
 
 final class PostTableViewCell: UITableViewCell {
     
     static let id = "PostTableViewCell"
+    
+    private var post: PostForProfile = PostForProfile()
     
     private let authorPostView: UILabel = {
         let view = UILabel()
@@ -62,9 +64,24 @@ final class PostTableViewCell: UITableViewCell {
         authorPostView.text = data.author
         descriptionPostView.text = data.description
         imagePostView.image = UIImage(named: data.image)
-        likesPostView.text = "Likes: \(data.likes)"
-        viewsPostView.text = "Views: \(data.views)"
+//        likesPostView.text = NSLocalizedString("Likes", comment: "") + ": \(data.likes)"
+        likesPostView.text =  "\(data.likes.amountOfLikes)"
+        viewsPostView.text = NSLocalizedString("Views", comment: "") + ": \(data.views)"
+        
+        post = data
+        
+        let tap = UITapGestureRecognizer()
+        tap.numberOfTapsRequired = 2
+        tap.addTarget(self, action: #selector(doubleTappedCell))
+        self.isUserInteractionEnabled = true
+        self.addGestureRecognizer(tap)
     }
+    
+    @objc func doubleTappedCell(_ gesture: UIPanGestureRecognizer) {
+           
+            CoreDataManager.shared.addPost(author: post.author, text: post.description, image: post.image, likes: post.likes, views: post.views)
+        }
+        
     
     private func setupUI() {
         contentView.addSubview(authorPostView)
@@ -142,7 +159,7 @@ final class PostTableViewCell: UITableViewCell {
         ])
         
         authorPostView.font = .systemFont(ofSize: 20, weight: .bold)
-        authorPostView.textColor = .black
+        authorPostView.textColor = ColorManager.blackBacground
         authorPostView.numberOfLines = 2
         
         descriptionPostView.font = .systemFont(ofSize: 14, weight: .regular)
@@ -150,12 +167,12 @@ final class PostTableViewCell: UITableViewCell {
         descriptionPostView.numberOfLines = 0
         
         imagePostView.contentMode = .scaleAspectFit
-        imagePostView.backgroundColor = .black
+        imagePostView.backgroundColor = ColorManager.whiteBacground
         
         likesPostView.font = .systemFont(ofSize: 16, weight: .regular)
-        likesPostView.textColor = .black
+        likesPostView.textColor = ColorManager.blackBacground
         
         viewsPostView.font = .systemFont(ofSize: 16, weight: .regular)
-        viewsPostView.textColor = .black
+        viewsPostView.textColor = ColorManager.blackBacground
     }
 }

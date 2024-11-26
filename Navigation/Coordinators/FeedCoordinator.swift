@@ -37,14 +37,15 @@ final class FeedCoordinator: Coordinator {
         let viewModel = PostViewModel()
         let postViewController = PostViewController(postViewModel: viewModel)
         postViewController.coordinator = self
-        viewModel.firstPost = Post(title: "Первый пост")
+        viewModel.firstPost = PostForFeed(title: NSLocalizedString("First post", comment: ""))
         postViewController.titlePost = viewModel.firstPost?.title ?? ""
         navigationController.pushViewController(postViewController, animated: true)
     }
     
     func showInfo() {
-        
-        let infoViewController = InfoViewController()
+        let networkService = NetworkService()
+        let viewModel = InfoViewModel(networkService: networkService)
+        let infoViewController = InfoViewController(viewModel: viewModel)
         infoViewController.coordinator = self
         infoViewController.modalTransitionStyle = .coverVertical
         infoViewController.modalPresentationStyle = .pageSheet

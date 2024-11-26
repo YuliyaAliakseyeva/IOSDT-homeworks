@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 final class ProfileViewController: UIViewController {
     
@@ -16,6 +17,7 @@ final class ProfileViewController: UIViewController {
     private var dataForPost: [PostForProfile] = []
     private var dataForPhotos = PhotosForProfile.make()
     var coordinator: ProfileCoordinator?
+    var gestureDict : [NSValue: Int]  = [:]
     
     var user: User?
     
@@ -29,10 +31,10 @@ final class ProfileViewController: UIViewController {
         return tableView
     }()
     
-    private let activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .medium)
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        return indicator
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+            let indicator = UIActivityIndicatorView(style: .medium)
+            indicator.translatesAutoresizingMaskIntoConstraints = false
+            return indicator
     }()
     
     init(profileViewModel: ProfileViewModel) {
@@ -112,9 +114,12 @@ final class ProfileViewController: UIViewController {
             case .initial:
                 print("initial")
             case .loading:
-                tableView.isHidden = true
-                activityIndicator.isHidden = false
-                activityIndicator.startAnimating()
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    tableView.isHidden = true
+                    activityIndicator.isHidden = false
+                    activityIndicator.startAnimating()
+                }
             case .loaded(let posts):
                 DispatchQueue.main.async { [weak self] in
                     guard let self else { return }
@@ -178,6 +183,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as? PostTableViewCell else {return UITableViewCell()
             }
             
+//            let tap = UITapGestureRecognizer()
+//            tap.numberOfTapsRequired = 2
+//            tap.addTarget(self, action: #selector(doubleTappedCell))
+//            cell.isUserInteractionEnabled = true
+//            cell.addGestureRecognizer(tap)
+            
+            
             let post = dataForPost[indexPath.row]
             cell.configure(with: post)
             
@@ -187,6 +199,18 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+//    @objc func doubleTappedCell(_ gesture: UIPanGestureRecognizer) {
+//        print("doubleTappedCell")
+//        let key = NSValue.init(nonretainedObject: gesture)
+//                guard let row = gestureDict[key] else {return}
+//                print("row - \(row)")
+//                let indexPath = IndexPath(row: row, section: 0)
+//        print("indexPath - \(indexPath)")
+//        let post = dataForPost[indexPath.row]
+//        print("post - \(post)")
+//        CoreDataManager.shared.addPost(author: post.author, text: post.description, image: post.image, likes: post.likes, views: post.views)
+//    }
+//    
     func tableView(
         _ tableView: UITableView,
         heightForHeaderInSection section: Int

@@ -9,10 +9,10 @@ import Foundation
 import StorageService
 
 protocol PostViewModelProtocol {
-    var firstPost: Post? { get set }
+    var firstPost: PostForFeed? { get set }
 }
 
 final class PostViewModel: PostViewModelProtocol {
-    var firstPost: StorageService.Post?
+    var firstPost: StorageService.PostForFeed?
     
 }

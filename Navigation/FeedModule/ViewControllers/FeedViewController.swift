@@ -19,7 +19,7 @@ final class FeedViewController: UIViewController {
         field.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         field.textColor = .black
         field.backgroundColor = .white
-        field.placeholder = "secret word"
+        field.placeholder = NSLocalizedString("Secret word", comment: "")
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: field.frame.height))
         field.leftViewMode = .always
         
@@ -28,7 +28,7 @@ final class FeedViewController: UIViewController {
     
     private lazy var status: UILabel = {
         let label = UILabel()
-        label.text = "Статус проверки"
+        label.text = NSLocalizedString("Verification status", comment: "")
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -36,7 +36,7 @@ final class FeedViewController: UIViewController {
     }()
     
     
-    private lazy var checkGuessButton = CustomButton(title: "Проверить пароль") { [unowned self] in
+    private lazy var checkGuessButton = CustomButton(title: NSLocalizedString("Check password", comment: "")) { [unowned self] in
         guard let word = wordTextField.text else { return }
         if word != "" {
             feedViewModel?.check(word: word)
@@ -45,7 +45,7 @@ final class FeedViewController: UIViewController {
         }
     }
     
-    private lazy var firstPostButton = CustomButton(title: "Перейти к посту 1") { [unowned self] in
+    private lazy var firstPostButton = CustomButton(title: NSLocalizedString("Go to the first post", comment: "")) { [unowned self] in
         coordinator?.showPost()
     }
     
@@ -58,7 +58,7 @@ final class FeedViewController: UIViewController {
         return label
     }()
     
-    private lazy var secondPostButton = CustomButton(title: "Перейти к посту 2") { [unowned self] in
+    private lazy var secondPostButton = CustomButton(title: NSLocalizedString("Go to the second post", comment: "")) { [unowned self] in
         coordinator?.showPost()
     }
     
@@ -95,7 +95,7 @@ final class FeedViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .lightGray
-        title = "Лента"
+        title = NSLocalizedString("Feed", comment: "")
         
         view.addSubview(stackView)
         

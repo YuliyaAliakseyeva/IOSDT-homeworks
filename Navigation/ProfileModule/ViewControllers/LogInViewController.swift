@@ -5,19 +5,25 @@
 //  Created by Yuliya Vodneva on 8.02.24.
 //
 
+import Foundation
 import UIKit
+import FirebaseAuth
+import LocalAuthentication
+
 
 final class LogInViewController: UIViewController {
     
     var viewModel: LoginViewModelProtocol?
     var coordinator: ProfileCoordinator?
     
+    var localAuthorizationService = LocalAuthorizationService()
+    
     private lazy var logInScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .white
+        scrollView.backgroundColor = ColorManager.whiteBacground
         
         return scrollView
     }()
@@ -25,7 +31,7 @@ final class LogInViewController: UIViewController {
     private lazy var contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
+        view.backgroundColor = ColorManager.whiteBacground
         
         return view
     }()
@@ -82,6 +88,18 @@ final class LogInViewController: UIViewController {
         return button
     }()
     
+    private lazy var signUpButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var biometricsButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -98,6 +116,9 @@ final class LogInViewController: UIViewController {
         addSubviews()
         setupConstrains()
         setupSubviews()
+        
+        print(Auth.auth().currentUser as Any)
+        print(Auth.auth().currentUser?.email as Any)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,6 +145,8 @@ final class LogInViewController: UIViewController {
         contentView.addSubview(logoImage)
         contentView.addSubview(logInStackView)
         contentView.addSubview(logInButton)
+        contentView.addSubview(signUpButton)
+        contentView.addSubview(biometricsButton)
     }
     
     func setupConstrains() {
@@ -219,29 +242,55 @@ final class LogInViewController: UIViewController {
                 equalTo: contentView.trailingAnchor,
                 constant: -16
             ),
-            logInButton.bottomAnchor.constraint(
+           
+            signUpButton.topAnchor.constraint(
+                equalTo: logInButton.bottomAnchor,
+                constant: 16
+            ),
+            signUpButton.heightAnchor.constraint(
+                equalToConstant: 50
+            ),
+            signUpButton.leadingAnchor.constraint(
+                equalTo: contentView.leadingAnchor,
+                constant: 16
+            ),
+            signUpButton.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor,
+                constant: -16
+            ),
+//            signUpButton.bottomAnchor.constraint(
+//                equalTo: contentView.bottomAnchor,
+//                constant: -(120+100+120+100+16+50+16+50)
+//            ),
+            
+            biometricsButton.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 30),
+            biometricsButton.heightAnchor.constraint(equalToConstant: 50),
+            biometricsButton.widthAnchor.constraint(equalToConstant: 50),
+            biometricsButton.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
+            biometricsButton.bottomAnchor.constraint(
                 equalTo: contentView.bottomAnchor,
-                constant: -(120+100+120+100+16+50)
-            )
+                constant: -(120+100+120+100+16+50+16+50+30+30)
+            ),
+            
         ])
     }
     
     func setupSubviews() {
         
         emailTextField.backgroundColor = .systemGray6
-        emailTextField.placeholder = "Email or phone"
-        emailTextField.textColor = .black
+        emailTextField.placeholder = NSLocalizedString("EmailOrPhone", comment: "")
+        emailTextField.textColor = ColorManager.blackBacground
         emailTextField.keyboardType = UIKeyboardType.default
         emailTextField.returnKeyType = UIReturnKeyType.done
         emailTextField.font = UIFont.systemFont(ofSize: 16)
         emailTextField.autocapitalizationType = .none
         emailTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: emailTextField.frame.height))
         emailTextField.leftViewMode = .always
-        emailTextField.text = "Jasmine"
+        emailTextField.text = ""
         
         passwordTextField.backgroundColor = .systemGray6
-        passwordTextField.placeholder = "Password"
-        passwordTextField.textColor = .black
+        passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
+        passwordTextField.textColor = ColorManager.blackBacground
         passwordTextField.keyboardType = UIKeyboardType.default
         passwordTextField.returnKeyType = UIReturnKeyType.done
         passwordTextField.font = UIFont.systemFont(ofSize: 16)
@@ -249,7 +298,7 @@ final class LogInViewController: UIViewController {
         passwordTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: passwordTextField.frame.height))
         passwordTextField.leftViewMode = .always
         passwordTextField.isSecureTextEntry = true
-        passwordTextField.text = "Alladin"
+        passwordTextField.text = ""
         
         logInStackView.layer.cornerRadius = 10
         logInStackView.layer.borderWidth = 0.5
@@ -258,30 +307,136 @@ final class LogInViewController: UIViewController {
         
         let img = UIImage(named: "blue_pixel")
         logInButton.setBackgroundImage(img, for: .normal)
-        logInButton.setTitle("Log In", for: .normal)
+        logInButton.setTitle(NSLocalizedString("LogIn", comment: ""), for: .normal)
         logInButton.tintColor = .white
         logInButton.clipsToBounds = true
         logInButton.layer.cornerRadius = 10
         logInButton.addTarget(self, action: #selector(buttonLogInPressed(_:)), for: .touchUpInside)
+        
+        signUpButton.setTitle(NSLocalizedString("SignUp", comment: ""), for: .normal)
+        signUpButton.setTitleColor(UIColor(named: "Blue_#4885CC"), for: .normal)
+        signUpButton.addTarget(self, action: #selector(buttonSignUpPressed(_:)), for: .touchUpInside)
+        
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+        
+//        switch localAuthorizationService.authorizationType() {
+//        case .none:
+//            print("none")
+//        case .touchID:
+//            image.image = UIImage(systemName: "touchID")
+//        case .faceID:
+//            image.image = UIImage(systemName: "faceid")
+//        case .opticID:
+//            print("opticID")
+//        @unknown default:
+//            print("none")
+//        }
+        
+
+        image.image = UIImage(systemName: "faceid")
+
+        
+        biometricsButton.addSubview(image)
+        NSLayoutConstraint.activate([
+            image.topAnchor.constraint(equalTo: biometricsButton.topAnchor),
+            image.bottomAnchor.constraint(equalTo: biometricsButton.bottomAnchor),
+            image.leadingAnchor.constraint(equalTo: biometricsButton.leadingAnchor),
+            image.trailingAnchor.constraint(equalTo: biometricsButton.trailingAnchor)
+            
+        ])
+        
+        biometricsButton.addTarget(self, action: #selector(biometricsButtonPressed(_:)), for: .touchUpInside)
+    }
+    
+    @objc func biometricsButtonPressed(_ sender: UIButton) {
+        print("biometricsButtonPressed")
+//        self.localAuthorizationService.authorizeIfPossible {_ in 
+//            if true {
+//                print("localAuthorizationService is passed")
+//                DispatchQueue.main.async {
+//                    self.coordinator?.user = users[1]
+//                    self.coordinator?.isLoggedIn = true
+//                    self.coordinator?.showProfile()
+//                }
+//                
+//            } else {
+//                print("localAuthorizationService is not passed")
+//                
+//            }
+//        }
+        
+        
+            self.localAuthorizationService.authorizeIfPossible { [weak self] result in
+                guard let self else {return}
+                if true {
+                    DispatchQueue.main.async {[weak self] in
+                        
+                        guard let self else {return}
+                        
+                        self.viewModel?.biometricsButtonPressed { [weak self] in
+                            
+                            guard let self else {return}
+                            self.coordinator?.user = self.viewModel!.user
+                            self.coordinator?.isLoggedIn = self.viewModel!.isLoggedIn
+                            self.coordinator?.showProfile()
+                        }
+                    }
+                }else {
+                    
+                }
+            }
+        
     }
     
     @objc func buttonLogInPressed(_ sender: UIButton) {
-        coordinator?.user = viewModel!.userButtonPressed(loginVM: (emailTextField.text ?? ""), passwordVM: passwordTextField.text ?? "")
-        if viewModel!.isLoggedIn {
-            coordinator?.isLoggedIn = viewModel!.isLoggedIn
-            coordinator?.showProfile()
+        viewModel!.userButtonPressed(loginVM: (emailTextField.text ?? ""), passwordVM: passwordTextField.text ?? "") { [weak self] in
             
-        } else {
-            let alert = UIAlertController(title: "Ошибка", message: "Неверный логин или пароль", preferredStyle: .alert)
+            guard let self else {return}
             
-            alert.addAction(UIAlertAction(title: "ОК", style: .default, handler: {action in print("Ввести логин и пароль еще раз")
-            }))
-            
-            alert.modalTransitionStyle = .flipHorizontal
-            alert.modalPresentationStyle = .pageSheet
-            
-            present(alert, animated: true)
+            if self.viewModel!.isLoggedIn {
+                self.coordinator?.user = self.viewModel!.user
+                self.coordinator?.isLoggedIn = self.viewModel!.isLoggedIn
+                self.coordinator?.showProfile()
+            } else {
+                let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: self.viewModel!.error, preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "ОК", style: .default, handler: {action in print("Ввести логин и пароль еще раз")
+                }))
+                
+                alert.modalTransitionStyle = .flipHorizontal
+                alert.modalPresentationStyle = .pageSheet
+                
+                self.present(alert, animated: true)
+            }
         }
+    }
+    
+    @objc func buttonSignUpPressed(_ sender: UIButton) {
+        viewModel!.signUpButtonPressed(loginVM: (emailTextField.text!), passwordVM: passwordTextField.text!) { [weak self] in
+            
+            guard let self else {return}
+            
+            if self.viewModel!.isLoggedIn {
+                self.coordinator?.user = self.viewModel!.user
+                self.coordinator?.isLoggedIn = self.viewModel!.isLoggedIn
+                self.coordinator?.showProfile()
+                
+            } else {
+                let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: self.viewModel!.error, preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "ОК", style: .default, handler: {action in print("Ввести логин и пароль еще раз")
+                }))
+                
+                alert.modalTransitionStyle = .flipHorizontal
+                alert.modalPresentationStyle = .pageSheet
+                
+                self.present(alert, animated: true)
+            }
+        }
+        
     }
     
     private func setupKeyboardObservers() {

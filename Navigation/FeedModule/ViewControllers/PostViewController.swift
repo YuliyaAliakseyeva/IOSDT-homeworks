@@ -29,7 +29,7 @@ final class PostViewController: UIViewController {
         view.backgroundColor = .systemMint
         title = titlePost
         
-        let infoBarButton = UIBarButtonItem(title: "Инфо", style: .done, target: self, action: #selector(pressedButton))
+        let infoBarButton = UIBarButtonItem(title: NSLocalizedString("Info", comment: ""), style: .done, target: self, action: #selector(pressedButton))
         
         navigationItem.rightBarButtonItem = infoBarButton
     }

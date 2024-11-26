@@ -165,7 +165,7 @@ final class PhotosTableViewCell: UITableViewCell {
             ),
         ])
         
-        photosLabel.textColor = .black
+        photosLabel.textColor = ColorManager.blackBacground
         photosLabel.font = .systemFont(ofSize: 24, weight: .bold)
         
         photoView1.layer.cornerRadius = 6
@@ -180,7 +180,7 @@ final class PhotosTableViewCell: UITableViewCell {
         photoView4.layer.cornerRadius = 6
         photoView4.clipsToBounds = true
         
-        arrow.tintColor = .black
+        arrow.tintColor = ColorManager.blackBacground
     }
     
    
