@@ -8,12 +8,15 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import LocalAuthentication
 
 
 final class LogInViewController: UIViewController {
     
     var viewModel: LoginViewModelProtocol?
     var coordinator: ProfileCoordinator?
+    
+    var localAuthorizationService = LocalAuthorizationService()
     
     private lazy var logInScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -91,6 +94,12 @@ final class LogInViewController: UIViewController {
         return button
     }()
     
+    private lazy var biometricsButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -137,6 +146,7 @@ final class LogInViewController: UIViewController {
         contentView.addSubview(logInStackView)
         contentView.addSubview(logInButton)
         contentView.addSubview(signUpButton)
+        contentView.addSubview(biometricsButton)
     }
     
     func setupConstrains() {
@@ -248,10 +258,20 @@ final class LogInViewController: UIViewController {
                 equalTo: contentView.trailingAnchor,
                 constant: -16
             ),
-            signUpButton.bottomAnchor.constraint(
+//            signUpButton.bottomAnchor.constraint(
+//                equalTo: contentView.bottomAnchor,
+//                constant: -(120+100+120+100+16+50+16+50)
+//            ),
+            
+            biometricsButton.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 30),
+            biometricsButton.heightAnchor.constraint(equalToConstant: 50),
+            biometricsButton.widthAnchor.constraint(equalToConstant: 50),
+            biometricsButton.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
+            biometricsButton.bottomAnchor.constraint(
                 equalTo: contentView.bottomAnchor,
-                constant: -(120+100+120+100+16+50+16+50)
-            )
+                constant: -(120+100+120+100+16+50+16+50+30+30)
+            ),
+            
         ])
     }
     
@@ -296,6 +316,79 @@ final class LogInViewController: UIViewController {
         signUpButton.setTitle(NSLocalizedString("SignUp", comment: ""), for: .normal)
         signUpButton.setTitleColor(UIColor(named: "Blue_#4885CC"), for: .normal)
         signUpButton.addTarget(self, action: #selector(buttonSignUpPressed(_:)), for: .touchUpInside)
+        
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+        
+//        switch localAuthorizationService.authorizationType() {
+//        case .none:
+//            print("none")
+//        case .touchID:
+//            image.image = UIImage(systemName: "touchID")
+//        case .faceID:
+//            image.image = UIImage(systemName: "faceid")
+//        case .opticID:
+//            print("opticID")
+//        @unknown default:
+//            print("none")
+//        }
+        
+
+        image.image = UIImage(systemName: "faceid")
+
+        
+        biometricsButton.addSubview(image)
+        NSLayoutConstraint.activate([
+            image.topAnchor.constraint(equalTo: biometricsButton.topAnchor),
+            image.bottomAnchor.constraint(equalTo: biometricsButton.bottomAnchor),
+            image.leadingAnchor.constraint(equalTo: biometricsButton.leadingAnchor),
+            image.trailingAnchor.constraint(equalTo: biometricsButton.trailingAnchor)
+            
+        ])
+        
+        biometricsButton.addTarget(self, action: #selector(biometricsButtonPressed(_:)), for: .touchUpInside)
+    }
+    
+    @objc func biometricsButtonPressed(_ sender: UIButton) {
+        print("biometricsButtonPressed")
+//        self.localAuthorizationService.authorizeIfPossible {_ in 
+//            if true {
+//                print("localAuthorizationService is passed")
+//                DispatchQueue.main.async {
+//                    self.coordinator?.user = users[1]
+//                    self.coordinator?.isLoggedIn = true
+//                    self.coordinator?.showProfile()
+//                }
+//                
+//            } else {
+//                print("localAuthorizationService is not passed")
+//                
+//            }
+//        }
+        
+        
+            self.localAuthorizationService.authorizeIfPossible { [weak self] result in
+                guard let self else {return}
+                if true {
+                    DispatchQueue.main.async {[weak self] in
+                        
+                        guard let self else {return}
+                        
+                        self.viewModel?.biometricsButtonPressed { [weak self] in
+                            
+                            guard let self else {return}
+                            self.coordinator?.user = self.viewModel!.user
+                            self.coordinator?.isLoggedIn = self.viewModel!.isLoggedIn
+                            self.coordinator?.showProfile()
+                        }
+                    }
+                }else {
+                    
+                }
+            }
+        
     }
     
     @objc func buttonLogInPressed(_ sender: UIButton) {
